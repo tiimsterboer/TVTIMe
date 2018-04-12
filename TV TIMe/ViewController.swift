@@ -173,7 +173,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
-        
+        //NSKeyedArchiver.archiveRootObject(genreGroups, toFile: TVShow.ArchiveURL.path)
         
     }
     
@@ -191,6 +191,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             SearchResultsVC.showsList = self.searchShows
             SearchResultsVC.name = self.searchField.text!
             SearchResultsVC.tvShows = self.tvShows
+            SearchResultsVC.genreGroups = self.genreGroups
             print(searchShows.count)
             print(SearchResultsVC.showsList.count)
         }

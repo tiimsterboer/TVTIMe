@@ -9,6 +9,7 @@
 import Foundation
 
 var userQueue : [TVShow]?
+var testDict = ["hi" : "ho", "its": "off"]
 
 func saveData( userQueue: [TVShow]) {
     UserDefaults.standard.set(userQueue, forKey: "userQueue")

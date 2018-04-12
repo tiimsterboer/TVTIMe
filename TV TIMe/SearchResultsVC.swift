@@ -13,6 +13,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var tvShows: [TVShow] = []
     var showsList: [TVShow] = []
     var detailList: [TVShow] = []
+    var genreGroups: [String: [TVShow]] = [:]
     var name = ""
     @IBOutlet weak var showsTableView: UITableView!
     
@@ -55,6 +56,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             guard let DetailViewVC = segue.destination as? DetailViewVC else {return}
             DetailViewVC.showDetail = self.detailList
             DetailViewVC.tvShows = self.tvShows
+            DetailViewVC.genreGroups = self.genreGroups
         }
     }
     @IBAction func didUnwindFromDetailViewVC (_ sender: UIStoryboardSegue) {

@@ -13,6 +13,7 @@ class DetailViewVC: UIViewController {
     
     var showDetail : [TVShow] = []
     var tvShows : [TVShow] = []
+    var genreGroups: [String: [TVShow]] = [:]
     
     @IBOutlet weak var resultsLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!
@@ -33,6 +34,11 @@ class DetailViewVC: UIViewController {
                 print("error : \(err.localizedDescription)")
         }
         //print(tvShows.count)
+        print(testDict)
+        for key in genreGroups.keys {
+            print("\(key) : \(genreGroups[key]!.count)")
+        }
+        
     }
     
     @IBAction func findSimShows(_ sender: Any) {
