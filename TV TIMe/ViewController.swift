@@ -164,6 +164,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 os_log("Failed", log: OSLog.default, type: .error)
             }
         }
+        
+        //NSKeyedArchiver.archiveRootObject(genreGroups, toFile: TVShow.ArchiveURL2.path)
+        
+    }
+    
+    private func loadShows() -> [TVShow]? {
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: TVShow.ArchiveURL.path) as? [TVShow]!
+        
+    }
+    private func getGenres() {
         for (key, _) in genreGroups {
             for show in tvShows {
                 for genre in show.genres {
@@ -173,20 +184,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
-        //NSKeyedArchiver.archiveRootObject(genreGroups, toFile: TVShow.ArchiveURL.path)
-        
+        //return genreGroups
     }
-    
-    private func loadShows() -> [TVShow]? {
-        
-        return NSKeyedUnarchiver.unarchiveObject(withFile: TVShow.ArchiveURL.path) as? [TVShow]!
-        
-    }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSegue" {
             searchTheShows()
+            getGenres()
             guard let SearchResultsVC = segue.destination as? SearchResultsVC else {return}
             SearchResultsVC.showsList = self.searchShows
             SearchResultsVC.name = self.searchField.text!

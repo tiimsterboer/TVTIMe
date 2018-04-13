@@ -45,7 +45,7 @@ class DetailViewVC: UIViewController {
         //var topMatches = Dictionary<String, Double>()
         var sim = [0.0, 0.0, 0.0]
         var tS = ["", "", ""]
-        for x in 0...100 {
+        /*for x in 0...100 {
             let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).freq2)
             if cos > sim[0] {
                 sim[2] = sim[1]
@@ -75,7 +75,7 @@ class DetailViewVC: UIViewController {
         resultsLbl.isHidden = false
         for show in tS {
             resultsLbl.text = show
-        }
+        }*/
         
         /*var topMatches = ["a":0.0, "b":0.0]
         
@@ -89,10 +89,33 @@ class DetailViewVC: UIViewController {
             }
         }
         print(topMatches)*/
+        for x in genreGroups[showDetail[0].genres[0]]! {
+            let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).freq2)
+            if cos > sim[0] {
+                sim[2] = sim[1]
+                tS[2] = tS[1]
+                sim[1] = sim[0]
+                tS[1] = tS[0]
+                sim[0] = cos
+                tS[0] = x.name
+            }
+            else if cos > sim[1] {
+                sim[2] = sim[1]
+                tS[2] = tS[1]
+                sim[1] = cos
+                tS[1] = x.name
+            }
+            else if cos > sim[2] {
+                sim[2] = cos
+                tS[2] = x.name
+        }
     }
-    
+        
+        print(sim)
+        print(tS)
             
 }
     
 
 
+}
