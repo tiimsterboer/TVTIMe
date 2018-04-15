@@ -114,7 +114,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(searchField.text!)
         //var searchText = "Chicago"
         for show in tvShows {
-            if show.name.contains(searchField.text!) {
+            if show.name.lowercased().contains(searchField.text!.lowercased()) {
                 searchShows.append(show)
                 //print(show.name)
                 //print(show.imageURL ?? "default URL")
@@ -181,17 +181,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if key == genre {
                         genreGroups[key]?.append(show)
                     }
-                    else if show.genres == [] {
-                        genreGroups[""]?.append(show)
                     
                 }
             }
             
             
             }
+            for show in tvShows {
+                if show.genres == [] {
+                    genreGroups[""]?.append(show)
+                }
+            }
         }
         //return genreGroups
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSegue" {
