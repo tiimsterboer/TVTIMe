@@ -73,4 +73,19 @@ class CosSim {
         let cos = top / (sqrt(bot1) * sqrt(bot2))
         return cos
     }
+    //Taken from stackoverflow
+    class func randomNumber(between lower: Int, and upper: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(upper - lower))) + lower
+    }
+    class func makeList (forLowerBound lower: Int, andUpperBound upper:Int, andNumNumbers iterations: Int) -> [Int] {
+        guard iterations <= (upper - lower) else { return [] }
+        var numbers: Set<Int> = Set<Int>()
+        (0..<iterations).forEach { _ in
+            let beforeCount = numbers.count
+            repeat {
+                numbers.insert(randomNumber(between: lower, and: upper))
+            } while numbers.count == beforeCount
+        }
+        return numbers.map{ $0 }.sorted()
+    }
 }

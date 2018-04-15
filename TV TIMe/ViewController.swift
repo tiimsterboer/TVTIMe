@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var searchShows: [TVShow] = []
     var userQueue: [TVShow] = []
     //var genreGroups = [String:[TVShow]]()
-    var genreGroups: [String:[TVShow]] = ["Action":[], "Adult":[], "Adventure":[], "Anime":[], "Children":[], "Comedy":[], "Crime":[], "DIY":[], "Drama":[], "Espionage":[], "Family":[], "Fantasy":[], "Food":[], "History":[], "Horror":[], "Legal":[], "Medical":[], "Music":[], "Mystery":[], "Nature":[], "Romance":[], "Science-Fiction":[], "Sports":[], "Supernatural":[], "Thriller":[], "Travel":[], "War":[], "Western":[]]
+    var genreGroups: [String:[TVShow]] = ["":[], "Action":[], "Adult":[], "Adventure":[], "Anime":[], "Children":[], "Comedy":[], "Crime":[], "DIY":[], "Drama":[], "Espionage":[], "Family":[], "Fantasy":[], "Food":[], "History":[], "Horror":[], "Legal":[], "Medical":[], "Music":[], "Mystery":[], "Nature":[], "Romance":[], "Science-Fiction":[], "Sports":[], "Supernatural":[], "Thriller":[], "Travel":[], "War":[], "Western":[]]
     var myName = "Tim"
     var n = Int(arc4random_uniform(20367))
     var activityIndicator = UIActivityIndicatorView()
@@ -181,7 +181,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if key == genre {
                         genreGroups[key]?.append(show)
                     }
+                    else if show.genres == [] {
+                        genreGroups[""]?.append(show)
+                    
                 }
+            }
+            
+            
             }
         }
         //return genreGroups
