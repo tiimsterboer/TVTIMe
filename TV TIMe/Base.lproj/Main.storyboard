@@ -209,7 +209,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="O6O-96-tHY">
-                                <rect key="frame" x="20" y="80" width="210" height="295"/>
+                                <rect key="frame" x="16" y="80" width="210" height="295"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="295" id="4zy-xi-JMl"/>
                                     <constraint firstAttribute="height" constant="295" id="93B-hO-Eps"/>
@@ -232,10 +232,11 @@
                                 <state key="normal" title="Find Similar Shows"/>
                                 <connections>
                                     <action selector="findSimShows:" destination="Kud-g9-Jgm" eventType="touchUpInside" id="Mjc-uC-0l7"/>
+                                    <segue destination="bFe-QN-66M" kind="show" identifier="simSegue" id="26e-AK-qsT"/>
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRM-uL-HL4">
-                                <rect key="frame" x="257" y="80" width="98" height="302"/>
+                                <rect key="frame" x="253" y="80" width="102" height="302"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -249,7 +250,7 @@
                             <constraint firstItem="ZRM-uL-HL4" firstAttribute="top" secondItem="ceb-2l-hbt" secondAttribute="bottom" constant="20" id="3Ac-tM-eTa"/>
                             <constraint firstItem="CQA-BJ-7jH" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="5nw-cZ-7Bg"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="0ds-tr-xVG" secondAttribute="trailing" constant="20" id="8a5-PA-kac"/>
-                            <constraint firstItem="O6O-96-tHY" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="20" id="J1i-wY-M2o"/>
+                            <constraint firstItem="O6O-96-tHY" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="J1i-wY-M2o"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="pxt-WO-6fP" secondAttribute="trailing" constant="15" id="PjX-5M-aNq"/>
                             <constraint firstItem="pxt-WO-6fP" firstAttribute="top" secondItem="ZRM-uL-HL4" secondAttribute="bottom" constant="8" id="V96-IH-Z2k"/>
                             <constraint firstItem="ZRM-uL-HL4" firstAttribute="leading" secondItem="O6O-96-tHY" secondAttribute="trailing" constant="27" id="elr-ZR-7pO"/>
@@ -275,6 +276,76 @@
                 <exit id="TGv-yJ-zMO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2141.5999999999999" y="19.340329835082461"/>
+        </scene>
+        <!--Sim ShowsVC-->
+        <scene sceneID="B6g-ty-IZg">
+            <objects>
+                <viewController id="bFe-QN-66M" customClass="SimShowsVC" customModule="TV_TIMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bpQ-9E-DuQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oSB-pc-HAX">
+                                <rect key="frame" x="16" y="64" width="343" height="562"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="myCell" id="YrQ-ph-14W">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YrQ-ph-14W" id="7kA-B7-rbW">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="bFe-QN-66M" id="KFK-2U-43a"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gff-ye-YrU">
+                                <rect key="frame" x="16" y="627" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="5kP-9N-fxL"/>
+                                    <constraint firstAttribute="height" constant="30" id="xfX-Ly-168"/>
+                                </constraints>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="1SO-r5-gqf" kind="unwind" unwindAction="didUnwindFromSimShowsVC:" id="8Eb-18-3HN"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9gW-0M-DWB">
+                                <rect key="frame" x="20" y="31" width="335" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="iyY-kE-mGY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oSB-pc-HAX" firstAttribute="leading" secondItem="38v-If-ffE" secondAttribute="leading" constant="16" id="1yB-6H-8F7"/>
+                            <constraint firstItem="oSB-pc-HAX" firstAttribute="top" secondItem="9gW-0M-DWB" secondAttribute="bottom" constant="8" id="6KC-wM-qlU"/>
+                            <constraint firstItem="Gff-ye-YrU" firstAttribute="top" secondItem="oSB-pc-HAX" secondAttribute="bottom" constant="1" id="9B0-MI-tYL"/>
+                            <constraint firstItem="9gW-0M-DWB" firstAttribute="leading" secondItem="38v-If-ffE" secondAttribute="leading" constant="20" id="JdX-sZ-oPt"/>
+                            <constraint firstItem="38v-If-ffE" firstAttribute="bottom" secondItem="Gff-ye-YrU" secondAttribute="bottom" constant="10" id="WoD-kn-JXR"/>
+                            <constraint firstItem="38v-If-ffE" firstAttribute="trailing" secondItem="oSB-pc-HAX" secondAttribute="trailing" constant="16" id="fYO-g6-mpd"/>
+                            <constraint firstItem="38v-If-ffE" firstAttribute="trailing" secondItem="9gW-0M-DWB" secondAttribute="trailing" constant="20" id="n7X-Uk-wDw"/>
+                            <constraint firstItem="9gW-0M-DWB" firstAttribute="top" secondItem="38v-If-ffE" secondAttribute="top" constant="11" id="sJ7-jw-qgF"/>
+                            <constraint firstItem="Gff-ye-YrU" firstAttribute="leading" secondItem="38v-If-ffE" secondAttribute="leading" constant="16" id="uSc-wf-Xs5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="38v-If-ffE"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="9gW-0M-DWB" id="wvc-O2-lla"/>
+                        <outlet property="simShowsTable" destination="oSB-pc-HAX" id="jCe-87-ixI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sym-8r-sdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="1SO-r5-gqf" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2885.5999999999999" y="18.440779610194905"/>
         </scene>
     </scenes>
 </document>

@@ -14,6 +14,7 @@ class DetailViewVC: UIViewController {
     var showDetail : [TVShow] = []
     var tvShows : [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
+    var tS :[TVShow] = []
     
     @IBOutlet weak var resultsLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!
@@ -43,9 +44,10 @@ class DetailViewVC: UIViewController {
     
     @IBAction func findSimShows(_ sender: Any) {
         //var topMatches = Dictionary<String, Double>()
-        var sim = [0.0, 0.0, 0.0]
-        var tS :[TVShow] = [showDetail[0], showDetail [0], showDetail[0]]
+        var sim = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         var rands : [Int] = []
+        tS = [showDetail[0], showDetail [0], showDetail[0],showDetail[0], showDetail [0], showDetail[0],showDetail[0], showDetail [0], showDetail[0], showDetail[0]]
+        
         
         if showDetail[0].genres == [] {
             rands =  CosSim.makeList(forLowerBound: 0, andUpperBound: (genreGroups[""]?.count)!, andNumNumbers: 200)
@@ -53,6 +55,20 @@ class DetailViewVC: UIViewController {
             for x in rands {
                 let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).freq2)
                 if cos > sim[0] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = sim[5]
+                    tS[6] = tS[5]
+                    sim[5] = sim[4]
+                    tS[5] = tS[4]
+                    sim[4] = sim[3]
+                    tS[4] = tS[3]
+                    sim[3] = sim[2]
+                    tS[3] = tS[2]
                     sim[2] = sim[1]
                     tS[2] = tS[1]
                     sim[1] = sim[0]
@@ -61,14 +77,112 @@ class DetailViewVC: UIViewController {
                     tS[0] = tvShows[x]
                 }
                 else if cos > sim[1] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = sim[5]
+                    tS[6] = tS[5]
+                    sim[5] = sim[4]
+                    tS[5] = tS[4]
+                    sim[4] = sim[3]
+                    tS[4] = tS[3]
+                    sim[3] = sim[2]
+                    tS[3] = tS[2]
                     sim[2] = sim[1]
                     tS[2] = tS[1]
                     sim[1] = cos
                     tS[1] = tvShows[x]
                 }
                 else if cos > sim[2] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = sim[5]
+                    tS[6] = tS[5]
+                    sim[5] = sim[4]
+                    tS[5] = tS[4]
+                    sim[4] = sim[3]
+                    tS[4] = tS[3]
+                    sim[3] = sim[2]
+                    tS[3] = tS[2]
                     sim[2] = cos
                     tS[2] = tvShows[x]
+                }
+                else if cos > sim[3] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = sim[5]
+                    tS[6] = tS[5]
+                    sim[5] = sim[4]
+                    tS[5] = tS[4]
+                    sim[4] = sim[3]
+                    tS[4] = tS[3]
+                    sim[3] = cos
+                    tS[3] = tvShows[x]
+                }
+                else if cos > sim[4] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = sim[5]
+                    tS[6] = tS[5]
+                    sim[5] = sim[4]
+                    tS[5] = tS[4]
+                    sim[4] = cos
+                    tS[4] = tvShows[x]
+                }
+                else if cos > sim[5] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = sim[5]
+                    tS[6] = tS[5]
+                    sim[5] = cos
+                    tS[5] = tvShows[x]
+                }
+                else if cos > sim[6] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = sim[6]
+                    tS[7] = tS[6]
+                    sim[6] = cos
+                    tS[6] = tvShows[x]
+                }
+                else if cos > sim[7] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = sim[7]
+                    tS[8] = tS[7]
+                    sim[7] = cos
+                    tS[7] = tvShows[x]
+                }
+                else if cos > sim[8] {
+                    sim[9] = sim[8]
+                    tS[9] = tS[8]
+                    sim[8] = cos
+                    tS[8] = tvShows[x]
+                }
+                else if cos > sim[9] {
+                    sim[9] = cos
+                    tS[9] = tvShows[x]
                 }
             }
         }
@@ -171,7 +285,20 @@ class DetailViewVC: UIViewController {
         testQueue.append("Tim")
         print(testQueue)
 }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "simSegue" {
+            guard let SimShowsVC = segue.destination as? SimShowsVC else {return}
+            SimShowsVC.simShows = self.tS
+            SimShowsVC.name = self.showDetail[0].name
+            //SearchResultsVC.tvShows = self.tvShows
+            //SearchResultsVC.genreGroups = self.genreGroups
+            //print(searchShows.count)
+            //print(SearchResultsVC.showsList.count)
+        }
+    }
+    @IBAction func didUnwindFromSimShowsVC(_ sender: UIStoryboardSegue) {
+        guard let simShowVc = sender.source as? SimShowsVC else {return}
+    }
 
 
 }
