@@ -22,15 +22,23 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        myCell.textLabel?.text = simShows[indexPath.row].name
+        let myCell = tableView.dequeueReusableCell(withIdentifier: "myCell") as! CustomTableViewCell
+        
+        myCell.cellName.text = simShows[indexPath.row].name
+        do {
+            let data = try Data(contentsOf: simShows[indexPath.row].imageURL!)
+            myCell.cellImage.image = UIImage(data: data)
+        }
+        catch let err {
+            print("error : \(err.localizedDescription)")
+        }
         return myCell
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.simShowsTable.rowHeight = 100
         simShowsTable.delegate = self
         simShowsTable.dataSource = self
         nameLabel.text = "Here are shows similar to \(name)"

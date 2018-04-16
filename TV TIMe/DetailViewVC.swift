@@ -15,9 +15,12 @@ class DetailViewVC: UIViewController {
     var tvShows : [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
     var tS :[TVShow] = []
+    var genTxt = " "
     
-    @IBOutlet weak var resultsLbl: UILabel!
+    
     @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var genresLbl: UILabel!
+    
     
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var showImg: UIImageView!
@@ -26,7 +29,7 @@ class DetailViewVC: UIViewController {
         let showSumm = showDetail[0].summary.removeTags(txt: showDetail[0].summary)
         detailLabel.text = showSumm
         nameLbl.text = showDetail[0].name
-        //genresLbl.text = showDetail[0].genres
+        
         do {
             let data = try Data(contentsOf: showDetail[0].imageURL!)
             self.showImg.image = UIImage(data: data)
@@ -36,6 +39,11 @@ class DetailViewVC: UIViewController {
         }
         //print(tvShows.count)
         print(testDict)
+        for gen in showDetail[0].genres {
+            genTxt += "- \(gen) - "
+        }
+        genresLbl.text = genTxt
+        
         for key in genreGroups.keys {
             print("\(key) : \(genreGroups[key]!.count)")
         }
@@ -198,6 +206,20 @@ class DetailViewVC: UIViewController {
                     for x in rands {
                         let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[gen]![x].summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[gen]![x].summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[gen]![x].summary).freq2)
                         if cos > sim[0] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = sim[2]
+                            tS[3] = tS[2]
                             sim[2] = sim[1]
                             tS[2] = tS[1]
                             sim[1] = sim[0]
@@ -206,14 +228,112 @@ class DetailViewVC: UIViewController {
                             tS[0] = genreGroups[gen]![x]
                         }
                         else if cos > sim[1] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = sim[2]
+                            tS[3] = tS[2]
                             sim[2] = sim[1]
                             tS[2] = tS[1]
                             sim[1] = cos
                             tS[1] = genreGroups[gen]![x]
                         }
                         else if cos > sim[2] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = sim[2]
+                            tS[3] = tS[2]
                             sim[2] = cos
                             tS[2] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[3] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = cos
+                            tS[3] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[4] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = cos
+                            tS[4] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[5] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = cos
+                            tS[5] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[6] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = cos
+                            tS[6] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[7] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = cos
+                            tS[7] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[8] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = cos
+                            tS[8] = genreGroups[gen]![x]
+                        }
+                        else if cos > sim[9] {
+                            sim[9] = cos
+                            tS[9] = genreGroups[gen]![x]
                         }
                     }
                 }
@@ -221,6 +341,20 @@ class DetailViewVC: UIViewController {
                     for x in genreGroups[gen]! {
                         let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).freq2)
                         if cos > sim[0] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = sim[2]
+                            tS[3] = tS[2]
                             sim[2] = sim[1]
                             tS[2] = tS[1]
                             sim[1] = sim[0]
@@ -229,14 +363,112 @@ class DetailViewVC: UIViewController {
                             tS[0] = x
                         }
                         else if cos > sim[1] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = sim[2]
+                            tS[3] = tS[2]
                             sim[2] = sim[1]
                             tS[2] = tS[1]
                             sim[1] = cos
                             tS[1] = x
                         }
                         else if cos > sim[2] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = sim[2]
+                            tS[3] = tS[2]
                             sim[2] = cos
                             tS[2] = x
+                        }
+                        else if cos > sim[3] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = sim[3]
+                            tS[4] = tS[3]
+                            sim[3] = cos
+                            tS[3] = x
+                        }
+                        else if cos > sim[4] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = sim[4]
+                            tS[5] = tS[4]
+                            sim[4] = cos
+                            tS[4] = x
+                        }
+                        else if cos > sim[5] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = sim[5]
+                            tS[6] = tS[5]
+                            sim[5] = cos
+                            tS[5] = x
+                        }
+                        else if cos > sim[6] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = sim[6]
+                            tS[7] = tS[6]
+                            sim[6] = cos
+                            tS[6] = x
+                        }
+                        else if cos > sim[7] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = sim[7]
+                            tS[8] = tS[7]
+                            sim[7] = cos
+                            tS[7] = x
+                        }
+                        else if cos > sim[8] {
+                            sim[9] = sim[8]
+                            tS[9] = tS[8]
+                            sim[8] = cos
+                            tS[8] = x
+                        }
+                        else if cos > sim[9] {
+                            sim[9] = cos
+                            tS[9] = x
                         }
                     }
                 }

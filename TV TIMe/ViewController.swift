@@ -11,7 +11,9 @@ import Alamofire
 import SwiftyJSON
 import os.log
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
     
     
     
@@ -20,10 +22,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var userQueue: [TVShow] = []
     //var genreGroups = [String:[TVShow]]()
     var genreGroups: [String:[TVShow]] = ["":[], "Action":[], "Adult":[], "Adventure":[], "Anime":[], "Children":[], "Comedy":[], "Crime":[], "DIY":[], "Drama":[], "Espionage":[], "Family":[], "Fantasy":[], "Food":[], "History":[], "Horror":[], "Legal":[], "Medical":[], "Music":[], "Mystery":[], "Nature":[], "Romance":[], "Science-Fiction":[], "Sports":[], "Supernatural":[], "Thriller":[], "Travel":[], "War":[], "Western":[]]
+    var genres = ["", "Action", "Adult", "Adventure", "Anime", "Children", "Comedy", "Crime", "DIY", "Drama", "Espionage", "Family", "Fantasy", "Food", "History", "Horror", "Legal", "Medical", "Music", "Mystery", "Nature", "Romance", "Science-Fiction", "Sports", "Supernatural", "Thriller", "Travel", "War", "Western"]
     var myName = "Tim"
     var n = Int(arc4random_uniform(20367))
     var activityIndicator = UIActivityIndicatorView()
-    
+    var gen = ""
 
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
@@ -31,10 +34,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var queueTableView: UITableView!
     
+    @IBOutlet weak var genrePicker: UIPickerView!
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genres.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genres[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        gen = genres[row]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         queueTableView.delegate = self
         queueTableView.dataSource = self
+        genrePicker.delegate = self
+        genrePicker.dataSource = self
         
         
         
@@ -97,6 +118,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }*/
         print(tvShows.count)
         print(genreGroups)
+        print(gen)
+        getGenres()
     }
     
     @IBAction func search(_ sender: Any) {
@@ -113,17 +136,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("works")
         print(searchField.text!)
         //var searchText = "Chicago"
+        if gen != "" {
+            for show in genreGroups[gen]! {
+                if show.name.lowercased().contains(searchField.text!.lowercased()) {
+                    searchShows.append(show)
+                }
+            }
+        }
+        else {
         for show in tvShows {
             if show.name.lowercased().contains(searchField.text!.lowercased()) {
                 searchShows.append(show)
                 //print(show.name)
                 //print(show.imageURL ?? "default URL")
             }
-            
+                }
         }
         print(searchShows.count)
-        
-    }
+        }
+    
     private func saveShows() {
         print("action works")
         
@@ -199,7 +230,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSegue" {
             searchTheShows()
-            getGenres()
+            //getGenres()
             guard let SearchResultsVC = segue.destination as? SearchResultsVC else {return}
             SearchResultsVC.showsList = self.searchShows
             SearchResultsVC.name = self.searchField.text!
@@ -214,7 +245,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         }
     
-    }
+}
     
 
 

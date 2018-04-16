@@ -24,9 +24,16 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let myCell = tableView.dequeueReusableCell(withIdentifier: "protoCell", for: indexPath)
-        myCell.textLabel?.text = showsList[indexPath.row].name
-        return myCell
+        let protoCell = tableView.dequeueReusableCell(withIdentifier: "protoCell") as! CustomTableViewCell
+        protoCell.cellSearchName.text = showsList[indexPath.row].name
+        do {
+            let data = try Data(contentsOf: showsList[indexPath.row].imageURL!)
+            protoCell.cellsearchImg.image = UIImage(data: data)
+        }
+        catch let err {
+            print("error : \(err.localizedDescription)")
+        }
+        return protoCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -40,6 +47,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         showsTableView.delegate = self
         showsTableView.dataSource = self
+        self.showsTableView.rowHeight = 100
         
         for show in showsList {
             print("\(show.name) \(show.genres)" )
