@@ -8,7 +8,7 @@
 
 import Foundation
 
-var userQueue : [TVShow] = []
+//var userQueue : [TVShow] = []
 var testDict = ["hi" : "ho", "its": "off"]
 var testQueue : [String] = []
 

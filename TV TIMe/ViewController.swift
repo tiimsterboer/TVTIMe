@@ -266,14 +266,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             SearchResultsVC.name = self.searchField.text!
             SearchResultsVC.tvShows = self.tvShows
             SearchResultsVC.genreGroups = self.genreGroups
+            SearchResultsVC.userQueue = self.userQueue
             print(searchShows.count)
             print(SearchResultsVC.showsList.count)
         }
+        if segue.identifier == "userQueueSeg" {
+            guard let UserQueueVC = segue.destination as? UserQueueVC else {return}
+            UserQueueVC.userQueue = userQueue
+        }
     }
+    
+    
     @IBAction func didUnwindFromSearchResultsVC(_ sender: UIStoryboardSegue) {
         guard let SearchResultsVC = sender.source as? SearchResultsVC else { return }
-        
+        userQueue = SearchResultsVC.userQueue
         }
+    @IBAction func didUnWindFromUserQueueVC(_ sender: UIStoryboardSegue) {
+        guard let UserQueueVC = sender.source as? UserQueueVC else { return }
+        userQueue = UserQueueVC.userQueue
+    }
     
 }
     

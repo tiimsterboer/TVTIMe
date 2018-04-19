@@ -11,6 +11,7 @@ import UIKit
 class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var tvShows: [TVShow] = []
+    var userQueue: [TVShow] = []
     var showsList: [TVShow] = []
     var detailList: [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
@@ -44,7 +45,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super .viewDidLoad()
-        userQueue.append(showsList[0])
+        //userQueue.append(showsList[0])
         showsTableView.delegate = self
         showsTableView.dataSource = self
         self.showsTableView.rowHeight = 100
@@ -57,9 +58,9 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         print(showsList.count)
         print(tvShows.count)
         nameLabel.text = "Shows that match \(name)"
-        for show in userQueue {
-            print (show.name)
-        }
+        //for show in userQueue {
+            //print (show.name)
+       // }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailSegue" {
@@ -68,10 +69,13 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             DetailViewVC.showDetail = self.detailList
             DetailViewVC.tvShows = self.tvShows
             DetailViewVC.genreGroups = self.genreGroups
+            DetailViewVC.userQueue = self.userQueue
         }
     }
     @IBAction func didUnwindFromDetailViewVC (_ sender: UIStoryboardSegue) {
-        detailList = []
+        guard let DetailViewVC = sender.source as? DetailViewVC else {return}
+        userQueue = DetailViewVC.userQueue 
+        
     
     }
 }

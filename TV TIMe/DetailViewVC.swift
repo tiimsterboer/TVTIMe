@@ -13,6 +13,7 @@ class DetailViewVC: UIViewController {
     
     var showDetail : [TVShow] = []
     var tvShows : [TVShow] = []
+    var userQueue : [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
     var tS :[TVShow] = []
     var genTxt = " "
@@ -21,6 +22,9 @@ class DetailViewVC: UIViewController {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var genresLbl: UILabel!
     
+    @IBAction func addToQueue(_ sender: Any) {
+        userQueue.append(showDetail[0])
+    }
     
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var showImg: UIImageView!

@@ -20,6 +20,7 @@
 		82824BE6206D8CC0001330C7 /* cosSim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82824BE5206D8CC0001330C7 /* cosSim.swift */; };
 		829C68462084080E00F167CF /* SimShowsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829C68452084080E00F167CF /* SimShowsVC.swift */; };
 		829C68482084370000F167CF /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829C68472084370000F167CF /* CustomTableViewCell.swift */; };
+		829C684C20893CDB00F167CF /* UserQueueVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829C684B20893CDB00F167CF /* UserQueueVC.swift */; };
 		82BFBE17207C35D600CEE443 /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BFBE16207C35D600CEE443 /* String+Regex.swift */; };
 		82BFBE19207C50B500CEE443 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BFBE18207C50B500CEE443 /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,7 @@
 		82824BE5206D8CC0001330C7 /* cosSim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cosSim.swift; sourceTree = "<group>"; };
 		829C68452084080E00F167CF /* SimShowsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimShowsVC.swift; sourceTree = "<group>"; };
 		829C68472084370000F167CF /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		829C684B20893CDB00F167CF /* UserQueueVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserQueueVC.swift; sourceTree = "<group>"; };
 		82BFBE16207C35D600CEE443 /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		82BFBE18207C50B500CEE443 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DE0FC8AA30620B99A3F0B2D1 /* Pods_TV_TIMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TV_TIMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 				82824BE5206D8CC0001330C7 /* cosSim.swift */,
 				82BFBE16207C35D600CEE443 /* String+Regex.swift */,
 				825194B92044F7C800B818F4 /* AppDelegate.swift */,
+				829C684B20893CDB00F167CF /* UserQueueVC.swift */,
 				825194BB2044F7C800B818F4 /* ViewController.swift */,
 				82824BE12059DAA4001330C7 /* SearchResultsVC.swift */,
 				82824BE3205C6F36001330C7 /* DetailViewVC.swift */,
@@ -255,6 +258,7 @@
 				829C68462084080E00F167CF /* SimShowsVC.swift in Sources */,
 				825194CF2044F7F200B818F4 /* TVShow.swift in Sources */,
 				82824BE4205C6F36001330C7 /* DetailViewVC.swift in Sources */,
+				829C684C20893CDB00F167CF /* UserQueueVC.swift in Sources */,
 				825194C22044F7C800B818F4 /* TV_TIMe.xcdatamodeld in Sources */,
 				82BFBE19207C50B500CEE443 /* Constants.swift in Sources */,
 			);

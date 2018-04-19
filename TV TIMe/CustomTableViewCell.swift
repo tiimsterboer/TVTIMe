@@ -17,7 +17,10 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var cellName: UILabel!
     @IBOutlet weak var cellSearchName: UILabel!
     
+    @IBOutlet weak var cellView3: UIView!
+    @IBOutlet weak var queueImg: UIImageView!
     
+    @IBOutlet weak var queueName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
