@@ -153,6 +153,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print("works")
         print(searchField.text!)
         //var searchText = "Chicago"
+        if gen == "" && searchField.text == "" {
+            for show in tvShows{
+                searchShows.append(show)
+            }
+        }
         if gen != "" {
             for show in genreGroups[gen]! {
                 if searchField.text != "" {
@@ -175,6 +180,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
                 }
         }
+        
         print(searchShows.count)
         
         }

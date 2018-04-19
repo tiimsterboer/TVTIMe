@@ -44,7 +44,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super .viewDidLoad()
-        
+        userQueue.append(showsList[0])
         showsTableView.delegate = self
         showsTableView.dataSource = self
         self.showsTableView.rowHeight = 100
@@ -57,6 +57,9 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         print(showsList.count)
         print(tvShows.count)
         nameLabel.text = "Shows that match \(name)"
+        for show in userQueue {
+            print (show.name)
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailSegue" {
