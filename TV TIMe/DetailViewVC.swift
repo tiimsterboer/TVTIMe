@@ -29,7 +29,7 @@ class DetailViewVC: UIViewController {
         let showSumm = showDetail[0].summary.removeTags(txt: showDetail[0].summary)
         detailLabel.text = showSumm
         nameLbl.text = showDetail[0].name
-        
+        showImg.layer.cornerRadius = 10
         do {
             let data = try Data(contentsOf: showDetail[0].imageURL!)
             self.showImg.image = UIImage(data: data)

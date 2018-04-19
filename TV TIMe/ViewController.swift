@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import os.log
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     
@@ -32,7 +32,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var loadingLbl: UILabel!
     
-    @IBOutlet weak var queueTableView: UITableView!
+    @IBOutlet weak var randShowImg: UIImageView!
+    
+    @IBOutlet weak var randShowName: UILabel!
     
     @IBOutlet weak var genrePicker: UIPickerView!
     
@@ -49,11 +51,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         gen = genres[row]
     }
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let attributedString = NSAttributedString(string: genres[row], attributes: [NSAttributedStringKey.foregroundColor : UIColor.white])
+        return attributedString
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        queueTableView.delegate = self
-        queueTableView.dataSource = self
+        //queueTableView.delegate = self
+        //queueTableView.dataSource = self
         genrePicker.delegate = self
         genrePicker.dataSource = self
         
@@ -76,17 +82,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.loadingLbl.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
                     print(self.tvShows.count)
-                    self.searchField.becomeFirstResponder()
+                    //self.searchField.becomeFirstResponder()
                     self.userQueue.append(self.tvShows[self.n])
                     print(self.userQueue[0].name)
+                    self.randShowName.text = self.tvShows[self.n].name
+                    do {
+                        let data = try Data(contentsOf: self.tvShows[self.n].imageURL!)
+                        self.randShowImg.image = UIImage(data: data)
+                    }
+                    catch let err {
+                        print("error : \(err.localizedDescription)")
+                    }
+                    self.randShowName.isHidden = false
+                    self.randShowImg.isHidden = false
                 }
                     
             }
         }
+        
      
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    /*func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userQueue.count
     }
     
@@ -99,7 +116,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         queueTableView.reloadData()
-    }
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,7 +155,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //var searchText = "Chicago"
         if gen != "" {
             for show in genreGroups[gen]! {
-                if show.name.lowercased().contains(searchField.text!.lowercased()) {
+                if searchField.text != "" {
+                    if show.name.lowercased().contains(searchField.text!.lowercased()) {
+                        searchShows.append(show)
+                    }
+                    
+                }
+                else {
                     searchShows.append(show)
                 }
             }
@@ -153,6 +176,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
         }
         print(searchShows.count)
+        
         }
     
     private func saveShows() {
