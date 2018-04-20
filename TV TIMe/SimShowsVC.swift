@@ -12,6 +12,7 @@ import UIKit
 class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var simShows : [TVShow] = []
+    var detailList : [TVShow] = []
     var name : String = ""
     
     @IBOutlet weak var simShowsTable: UITableView!
@@ -36,12 +37,29 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you chose a show \(indexPath.row)")
+        detailList.append(simShows[indexPath.row])
+        self.performSegue(withIdentifier: "backToDetail", sender: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.simShowsTable.rowHeight = 100
         simShowsTable.delegate = self
         simShowsTable.dataSource = self
         nameLabel.text = "Here are shows similar to \(name)"
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToDetail" {
+            
+            guard let DetailViewVC = segue.destination as? DetailViewVC else {return}
+            DetailViewVC.showDetail = self.detailList
+            //DetailViewVC.tvShows = self.tvShows
+            //DetailViewVC.genreGroups = self.genreGroups
+            //DetailViewVC.userQueue = self.userQueue
+        }
     }
     
     

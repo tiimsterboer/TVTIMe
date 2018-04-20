@@ -21,6 +21,7 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var queueImg: UIImageView!
     
     @IBOutlet weak var queueName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
