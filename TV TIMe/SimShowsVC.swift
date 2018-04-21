@@ -13,6 +13,9 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var simShows : [TVShow] = []
     var detailList : [TVShow] = []
+    var searchList : [TVShow] = []
+    var userQueue : [TVShow] = []
+    var genreGroups: [String: [TVShow]] = [:]
     var name : String = ""
     
     @IBOutlet weak var simShowsTable: UITableView!
@@ -39,6 +42,7 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("you chose a show \(indexPath.row)")
+        detailList = []
         detailList.append(simShows[indexPath.row])
         self.performSegue(withIdentifier: "backToDetail", sender: nil)
     }
@@ -56,6 +60,9 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             guard let DetailViewVC = segue.destination as? DetailViewVC else {return}
             DetailViewVC.showDetail = self.detailList
+            DetailViewVC.searchList = self.searchList
+            DetailViewVC.genreGroups = self.genreGroups
+            DetailViewVC.userQueue = self.userQueue
             //DetailViewVC.tvShows = self.tvShows
             //DetailViewVC.genreGroups = self.genreGroups
             //DetailViewVC.userQueue = self.userQueue

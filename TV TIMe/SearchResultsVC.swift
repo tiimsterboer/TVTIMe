@@ -39,6 +39,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("you chose a show \(indexPath.row)")
+        detailList = []
         detailList.append(showsList[indexPath.row])
         self.performSegue(withIdentifier: "detailSegue", sender: nil)
     }
@@ -70,6 +71,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             DetailViewVC.tvShows = self.tvShows
             DetailViewVC.genreGroups = self.genreGroups
             DetailViewVC.userQueue = self.userQueue
+            DetailViewVC.searchList = self.showsList
         }
     }
     @IBAction func didUnwindFromDetailViewVC (_ sender: UIStoryboardSegue) {

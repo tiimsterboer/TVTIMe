@@ -273,6 +273,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if segue.identifier == "userQueueSeg" {
             guard let UserQueueVC = segue.destination as? UserQueueVC else {return}
             UserQueueVC.userQueue = userQueue
+            UserQueueVC.tvShows = self.tvShows
+            UserQueueVC.genreGroups = self.genreGroups
         }
     }
     

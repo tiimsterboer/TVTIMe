@@ -10,7 +10,12 @@ import Foundation
 import UIKit
 
 class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var userQueue : [TVShow] = []
+    var tvShows: [TVShow] = []
+    var userQueue: [TVShow] = []
+    //var showsList: [TVShow] = []
+    var detailList: [TVShow] = []
+    var genreGroups: [String: [TVShow]] = [:]
+    
     @IBOutlet weak var userQueueTV : UITableView!
     
     
@@ -33,12 +38,38 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return myCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you chose a show \(indexPath.row)")
+        detailList = []
+        detailList.append(userQueue[indexPath.row])
+        self.performSegue(withIdentifier: "queueToDetail", sender: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else {return}
+        userQueue.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     override func viewDidLoad() {
         super .viewDidLoad()
         //userQueue.append(showsList[0])
         userQueueTV.delegate = self
         userQueueTV.dataSource = self
         self.userQueueTV.rowHeight = 100
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "queueToDetail" {
+            
+            guard let DetailViewVC = segue.destination as? DetailViewVC else {return}
+            DetailViewVC.showDetail = self.detailList
+            DetailViewVC.tvShows = self.tvShows
+            DetailViewVC.genreGroups = self.genreGroups
+            DetailViewVC.userQueue = self.userQueue
+            //DetailViewVC.searchList = self.showsList
+        }
     }
     
 }

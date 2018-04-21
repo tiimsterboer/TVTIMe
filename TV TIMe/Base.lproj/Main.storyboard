@@ -98,6 +98,7 @@
                     </view>
                     <connections>
                         <outlet property="userQueueTV" destination="YVH-9F-pGT" id="T56-DX-LRL"/>
+                        <segue destination="Kud-g9-Jgm" kind="show" identifier="queueToDetail" id="rdx-tg-JE8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A9s-fG-2Hz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,6 +355,20 @@
                                     <segue destination="TGv-yJ-zMO" kind="unwind" unwindAction="didUnwindFromDetailViewVC:" id="hso-Oz-Qgx"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aut-JU-fE0">
+                                <rect key="frame" x="16" y="686" width="131" height="30"/>
+                                <color key="backgroundColor" red="0.22110804919999999" green="0.81579345459999997" blue="0.64426064490000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4yE-Rh-Dfw"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="I1D-UI-3ap"/>
+                                    <constraint firstAttribute="width" constant="131" id="QN1-83-0U9"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="131" id="lc1-KA-oLa"/>
+                                </constraints>
+                                <state key="normal" title="Home"/>
+                                <connections>
+                                    <segue destination="TGv-yJ-zMO" kind="unwind" unwindAction="didUnwindFromSearchResultsVC:" id="09M-GJ-eZO"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ceb-2l-hbt">
                                 <rect key="frame" x="20" y="30" width="374" height="30"/>
                                 <constraints>
@@ -387,27 +402,35 @@
                                 <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkP-fa-kwh">
-                                <rect key="frame" x="289" y="89" width="95" height="95"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkP-fa-kwh" userLabel="addToQueue">
+                                <rect key="frame" x="289" y="80" width="95" height="95"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="6mw-hb-IQk"/>
-                                    <constraint firstAttribute="width" constant="95" id="hzc-FI-itt"/>
+                                    <constraint firstAttribute="width" constant="95" id="1qr-rJ-cdM"/>
+                                    <constraint firstAttribute="height" constant="95" id="bej-hW-Poc"/>
                                 </constraints>
                                 <state key="normal" image="add_circle_grey_192x192"/>
                                 <connections>
-                                    <action selector="addToQueue:" destination="Kud-g9-Jgm" eventType="touchUpInside" id="baW-p5-QZU"/>
+                                    <action selector="addToQueue:" destination="Kud-g9-Jgm" eventType="touchUpInside" id="pTx-rc-hKW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ds-tr-xVG">
-                                <rect key="frame" x="289" y="227" width="95" height="95"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ds-tr-xVG" userLabel="alreadyInQueue">
+                                <rect key="frame" x="289" y="80" width="95" height="95"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="95" id="pTF-US-gsH"/>
-                                    <constraint firstAttribute="height" constant="95" id="uIE-lN-QAs"/>
+                                    <constraint firstAttribute="height" constant="95" id="aA0-MB-Bf1"/>
+                                    <constraint firstAttribute="width" constant="95" id="sVr-px-1YM"/>
+                                </constraints>
+                                <state key="normal" title="Find Similar Shows" image="my-gray-check-mark-png-md"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZn-de-SPf">
+                                <rect key="frame" x="289" y="233" width="95" height="95"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="5h3-IJ-ZlT"/>
+                                    <constraint firstAttribute="width" constant="95" id="LqJ-ur-YmZ"/>
                                 </constraints>
                                 <state key="normal" title="Find Similar Shows" image="Search (1)"/>
                                 <connections>
-                                    <action selector="findSimShows:" destination="Kud-g9-Jgm" eventType="touchUpInside" id="Mjc-uC-0l7"/>
-                                    <segue destination="bFe-QN-66M" kind="show" identifier="simSegue" id="26e-AK-qsT"/>
+                                    <action selector="findSimShows:" destination="Kud-g9-Jgm" eventType="touchUpInside" id="MVm-aH-4EK"/>
+                                    <segue destination="bFe-QN-66M" kind="show" identifier="simSegue" id="FSy-oN-qfb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -416,27 +439,35 @@
                             <constraint firstItem="ceb-2l-hbt" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="20" id="1FN-Qm-I8B"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="bottom" secondItem="CQA-BJ-7jH" secondAttribute="bottom" constant="20" id="2al-BF-C7a"/>
                             <constraint firstItem="CQA-BJ-7jH" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="5nw-cZ-7Bg"/>
+                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="vkP-fa-kwh" secondAttribute="trailing" constant="30" id="DTb-A5-S6Q"/>
                             <constraint firstItem="CQA-BJ-7jH" firstAttribute="top" secondItem="pxt-WO-6fP" secondAttribute="bottom" constant="5" id="Fwc-jj-dxR"/>
+                            <constraint firstItem="ZZn-de-SPf" firstAttribute="top" secondItem="0ds-tr-xVG" secondAttribute="bottom" constant="58" id="H3e-gA-uuZ"/>
                             <constraint firstItem="O6O-96-tHY" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="J1i-wY-M2o"/>
                             <constraint firstItem="pxt-WO-6fP" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="15" id="JWu-Ye-CBy"/>
-                            <constraint firstItem="0ds-tr-xVG" firstAttribute="top" secondItem="vkP-fa-kwh" secondAttribute="bottom" constant="43" id="Vtf-C2-60m"/>
-                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="vkP-fa-kwh" secondAttribute="trailing" constant="30" id="agI-CD-4Ns"/>
+                            <constraint firstItem="ZZn-de-SPf" firstAttribute="top" secondItem="vkP-fa-kwh" secondAttribute="bottom" constant="58" id="O7w-Ud-XW8"/>
+                            <constraint firstItem="aut-JU-fE0" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="Pbm-Oa-AX2"/>
+                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="0ds-tr-xVG" secondAttribute="trailing" constant="30" id="egY-cc-w5V"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="pxt-WO-6fP" secondAttribute="trailing" constant="15" id="fO2-0H-05b"/>
+                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="bottom" secondItem="aut-JU-fE0" secondAttribute="bottom" constant="20" id="fxx-2j-dt9"/>
                             <constraint firstItem="pxt-WO-6fP" firstAttribute="top" secondItem="kyr-J3-NMo" secondAttribute="bottom" constant="8" id="hmF-v8-PBz"/>
                             <constraint firstItem="O6O-96-tHY" firstAttribute="top" secondItem="ceb-2l-hbt" secondAttribute="bottom" constant="20" id="hw8-LJ-qkR"/>
+                            <constraint firstItem="vkP-fa-kwh" firstAttribute="top" secondItem="ceb-2l-hbt" secondAttribute="bottom" constant="20" id="iSd-tX-KgA"/>
+                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="ZZn-de-SPf" secondAttribute="trailing" constant="30" id="kB7-vj-i8f"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="ceb-2l-hbt" secondAttribute="trailing" constant="20" id="mlK-At-VDc"/>
                             <constraint firstItem="kyr-J3-NMo" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="oDz-8j-sbn"/>
-                            <constraint firstItem="vkP-fa-kwh" firstAttribute="top" secondItem="ceb-2l-hbt" secondAttribute="bottom" constant="29" id="sfw-Yw-wha"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="kyr-J3-NMo" secondAttribute="trailing" constant="16" id="vT4-Us-gbr"/>
                             <constraint firstItem="ceb-2l-hbt" firstAttribute="top" secondItem="IQR-K6-Qdu" secondAttribute="top" constant="10" id="xON-rr-Qsk"/>
                             <constraint firstItem="kyr-J3-NMo" firstAttribute="top" secondItem="O6O-96-tHY" secondAttribute="bottom" constant="8" id="xbv-1l-lKu"/>
-                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="0ds-tr-xVG" secondAttribute="trailing" constant="30" id="xfa-lm-udc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IQR-K6-Qdu"/>
                     </view>
                     <connections>
+                        <outlet property="addToQueueBtn" destination="vkP-fa-kwh" id="c9E-74-kXW"/>
+                        <outlet property="alreadyInQueueBtn" destination="0ds-tr-xVG" id="jQT-Ef-wJ2"/>
+                        <outlet property="backToSearchButton" destination="CQA-BJ-7jH" id="MEj-hX-Pts"/>
                         <outlet property="detailLabel" destination="pxt-WO-6fP" id="eOo-ac-Qch"/>
                         <outlet property="genresLbl" destination="kyr-J3-NMo" id="Fb3-TH-LHv"/>
+                        <outlet property="homeButton" destination="aut-JU-fE0" id="pgN-po-8uc"/>
                         <outlet property="nameLbl" destination="ceb-2l-hbt" id="pPR-QJ-Q7d"/>
                         <outlet property="showImg" destination="O6O-96-tHY" id="ao0-Dq-sTr"/>
                     </connections>
@@ -567,8 +598,9 @@
     <resources>
         <image name="Search (1)" width="256" height="256"/>
         <image name="add_circle_grey_192x192" width="192" height="192"/>
+        <image name="my-gray-check-mark-png-md" width="285" height="297"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="68p-6U-SPi"/>
+        <segue reference="rdx-tg-JE8"/>
     </inferredMetricsTieBreakers>
 </document>

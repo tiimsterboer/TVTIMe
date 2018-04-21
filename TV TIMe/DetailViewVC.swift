@@ -14,6 +14,7 @@ class DetailViewVC: UIViewController {
     var showDetail : [TVShow] = []
     var tvShows : [TVShow] = []
     var userQueue : [TVShow] = []
+    var searchList : [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
     var tS :[TVShow] = []
     var genTxt = " "
@@ -22,8 +23,45 @@ class DetailViewVC: UIViewController {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var genresLbl: UILabel!
     
+    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var backToSearchButton: UIButton!
+    
+    @IBOutlet weak var addToQueueBtn: UIButton!
+    @IBOutlet weak var alreadyInQueueBtn: UIButton!
+    
+    
     @IBAction func addToQueue(_ sender: Any) {
-        userQueue.append(showDetail[0])
+        var alreadyIn = false
+        for show in userQueue {
+            if show.id == showDetail[0].id {
+                let alert = UIAlertController(title: nil, message: "That's already in your queue!", preferredStyle: .alert)
+                let action1 = UIAlertAction(title: "ok", style: .default) { (action) in
+                    print ("OK")
+                }
+                alert.addAction(action1)
+                let subView = alert.view.subviews.first!
+                let alertContentView = subView.subviews.first!
+                alertContentView.backgroundColor = UIColor.darkGray
+                alertContentView.layer.cornerRadius = 5
+                present(alert, animated: true, completion: nil)
+                alreadyIn = true
+            }
+            
+        }
+        if alreadyIn == false {
+            userQueue.append(showDetail[0])
+            alreadyInQueueBtn.isHidden = false
+            addToQueueBtn.isHidden = true
+            let alert2 = UIAlertController(title: nil, message: "Added to Queue", preferredStyle: .alert)
+            let action1 = UIAlertAction(title: "OK", style: .default) { (action) in
+                print ("Ok")
+            }
+            alert2.addAction(action1)
+            present(alert2, animated: true, completion: nil)
+            
+        }
+        
+        
     }
     
     @IBOutlet weak var detailLabel: UILabel!
@@ -51,7 +89,21 @@ class DetailViewVC: UIViewController {
         for key in genreGroups.keys {
             print("\(key) : \(genreGroups[key]!.count)")
         }
-        
+        print(showDetail)
+        if searchList == [] {
+            backToSearchButton.isHidden = true
+            homeButton.isHidden = false
+        }
+        var inQueue = false
+        for show in userQueue {
+            if showDetail[0].id == show.id {
+                inQueue = true
+            }
+        }
+        if inQueue == true {
+            alreadyInQueueBtn.isHidden = false
+            addToQueueBtn.isHidden = true
+        }
     }
     
     @IBAction func findSimShows(_ sender: Any) {
@@ -62,6 +114,7 @@ class DetailViewVC: UIViewController {
         
         
         if showDetail[0].genres == [] {
+            rands = []
             rands =  CosSim.makeList(forLowerBound: 0, andUpperBound: (genreGroups[""]?.count)!, andNumNumbers: 200)
             
             for x in rands {
@@ -204,6 +257,7 @@ class DetailViewVC: UIViewController {
             for gen in showDetail[0].genres {
                 print(gen)
                 if (genreGroups[gen]?.count)! > perEach {
+                    rands = []
                     print(genreGroups[gen]!.count)
                     rands = CosSim.makeList(forLowerBound: 0, andUpperBound: (genreGroups[gen]?.count)!, andNumNumbers: perEach)
                     print(rands)
@@ -526,6 +580,9 @@ class DetailViewVC: UIViewController {
             guard let SimShowsVC = segue.destination as? SimShowsVC else {return}
             SimShowsVC.simShows = self.tS
             SimShowsVC.name = self.showDetail[0].name
+            SimShowsVC.searchList = self.searchList
+            SimShowsVC.genreGroups = self.genreGroups
+            SimShowsVC.userQueue = self.userQueue
             //SearchResultsVC.tvShows = self.tvShows
             //SearchResultsVC.genreGroups = self.genreGroups
             //print(searchShows.count)
@@ -533,7 +590,7 @@ class DetailViewVC: UIViewController {
         }
     }
     @IBAction func didUnwindFromSimShowsVC(_ sender: UIStoryboardSegue) {
-        guard let simShowVc = sender.source as? SimShowsVC else {return}
+        //guard let simShowVc = sender.source as? SimShowsVC else {return}
     }
 
 
