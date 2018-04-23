@@ -50,6 +50,7 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         userQueue.remove(at: indexPath.row)
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
+        NSKeyedArchiver.archiveRootObject(userQueue, toFile: TVShow.ArchiveURL2.path)
     }
     
     override func viewDidLoad() {

@@ -74,8 +74,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         // Do any additional setup after loading the view, typically from a nib.
         DispatchQueue.global(qos:.userInteractive).async {
+            if let savedQueue = self.loadQueue(){
+                self.userQueue += savedQueue
+            }
             if let savedShows = self.loadShows(){
                 self.tvShows += savedShows
+                
                 print("shows loaded")
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
@@ -233,6 +237,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     private func loadShows() -> [TVShow]? {
         
         return NSKeyedUnarchiver.unarchiveObject(withFile: TVShow.ArchiveURL.path) as? [TVShow]!
+        
+    }
+    
+    private func loadQueue() -> [TVShow]? {
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: TVShow.ArchiveURL2.path) as? [TVShow]!
         
     }
     private func getGenres() {

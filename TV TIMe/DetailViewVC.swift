@@ -60,7 +60,7 @@ class DetailViewVC: UIViewController {
             present(alert2, animated: true, completion: nil)
             
         }
-        
+        NSKeyedArchiver.archiveRootObject(userQueue, toFile: TVShow.ArchiveURL2.path)
         
     }
     

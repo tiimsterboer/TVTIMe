@@ -34,7 +34,7 @@ class TVShow: NSObject, NSCoding {
     //Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("shows")
-    //static let ArchiveURL2 = DocumentsDirectory.appendingPathComponent("genres")
+    static let ArchiveURL2 = DocumentsDirectory.appendingPathComponent("userQueue")
     
     //initializer
     init?(json: [String: Any]) {
