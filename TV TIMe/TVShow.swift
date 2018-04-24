@@ -35,6 +35,7 @@ class TVShow: NSObject, NSCoding {
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("shows")
     static let ArchiveURL2 = DocumentsDirectory.appendingPathComponent("userQueue")
+    static let ArchiveURL3 = DocumentsDirectory.appendingPathComponent("genreGroups")
     
     //initializer
     init?(json: [String: Any]) {

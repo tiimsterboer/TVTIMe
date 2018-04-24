@@ -52,13 +52,26 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         tableView.deleteRows(at: [indexPath], with: .automatic)
         NSKeyedArchiver.archiveRootObject(userQueue, toFile: TVShow.ArchiveURL2.path)
     }
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = userQueue[sourceIndexPath.row]
+        userQueue.remove(at: sourceIndexPath.row)
+        userQueue.insert(item, at: destinationIndexPath.row)
+        userQueueTV.reloadData()
+    }
+    
     
     override func viewDidLoad() {
         super .viewDidLoad()
         //userQueue.append(showsList[0])
         userQueueTV.delegate = self
         userQueueTV.dataSource = self
-        self.userQueueTV.rowHeight = 100
+        userQueueTV.rowHeight = 100
+        userQueueTV.setEditing(true, animated: true)
+        userQueueTV.backgroundColor = UIColor.darkGray
+        userQueueTV.backgroundView  = nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

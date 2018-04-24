@@ -38,6 +38,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var genrePicker: UIPickerView!
     
+    @IBOutlet weak var loadingView: UIImageView!
+    
+    @IBOutlet weak var loadingMessage: UILabel!
+    @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
+    @IBOutlet weak var loadingTitle: UILabel!
+    @IBOutlet weak var loadingTV: UIImageView!
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -58,32 +64,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //queueTableView.delegate = self
-        //queueTableView.dataSource = self
+        print(launch)
+        
         genrePicker.delegate = self
         genrePicker.dataSource = self
         
         
         
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = .gray
-        self.view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
+        //activityIndicator.center = self.view.center
+        //activityIndicator.hidesWhenStopped = true
+        //activityIndicator.activityIndicatorViewStyle = .gray
+        //self.view.addSubview(activityIndicator)
+        loadingWheel.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
         // Do any additional setup after loading the view, typically from a nib.
         DispatchQueue.global(qos:.userInteractive).async {
-            if let savedQueue = self.loadQueue(){
-                self.userQueue += savedQueue
-            }
-            if let savedShows = self.loadShows(){
-                self.tvShows += savedShows
-                
+            if firstLaunch {
+                self.saveShows()
                 print("shows loaded")
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.loadingLbl.isHidden = true
+                    self.loadingView.isHidden = true
+                    self.loadingTV.isHidden = true
+                    self.loadingWheel.isHidden = true
+                    self.loadingTitle.isHidden = true
+                    self.loadingWheel.stopAnimating()
+                    self.loadingMessage.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
                     print(self.tvShows.count)
                     //self.searchField.becomeFirstResponder()
@@ -100,27 +106,55 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     self.randShowName.isHidden = false
                     self.randShowImg.isHidden = false
                 }
-                    
             }
+            else {
+                if let savedGenres = self.loadGenres(){
+                    self.genreGroups = savedGenres
+                }
+                
+                if let savedQueue = self.loadQueue(){
+                    self.userQueue += savedQueue
+                }
+                if let savedShows = self.loadShows(){
+                    self.tvShows += savedShows
+                    
+                    print("shows loaded")
+                    DispatchQueue.main.async {
+                        self.loadingView.isHidden = true
+                        self.loadingTV.isHidden = true
+                        self.loadingWheel.isHidden = true
+                        self.loadingTitle.isHidden = true
+                        self.loadingWheel.stopAnimating()
+                        self.loadingMessage.isHidden = true
+                        //self.loadingLbl.isHidden = true
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        print(self.tvShows.count)
+                        //self.searchField.becomeFirstResponder()
+                        self.userQueue.append(self.tvShows[self.n])
+                        print(self.userQueue[0].name)
+                        self.randShowName.text = self.tvShows[self.n].name
+                        do {
+                            let data = try Data(contentsOf: self.tvShows[self.n].imageURL!)
+                            self.randShowImg.image = UIImage(data: data)
+                        }
+                        catch let err {
+                            print("error : \(err.localizedDescription)")
+                        }
+                        self.randShowName.isHidden = false
+                        self.randShowImg.isHidden = false
+                    }
+                    
+                }
+                
+                
+            }
+            
         }
         
      
     }
     
-    /*func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userQueue.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.textLabel?.text = userQueue[indexPath.row].name
-        
-        return cell
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        queueTableView.reloadData()
-    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -229,8 +263,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 os_log("Failed", log: OSLog.default, type: .error)
             }
         }
-        
-        //NSKeyedArchiver.archiveRootObject(genreGroups, toFile: TVShow.ArchiveURL2.path)
+        getGenres()
+        NSKeyedArchiver.archiveRootObject(genreGroups, toFile: TVShow.ArchiveURL3.path)
+        NSKeyedArchiver.archiveRootObject(userQueue, toFile: TVShow.ArchiveURL2.path)
         
     }
     
@@ -245,6 +280,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return NSKeyedUnarchiver.unarchiveObject(withFile: TVShow.ArchiveURL2.path) as? [TVShow]!
         
     }
+    
+    private func loadGenres() -> [String:[TVShow]]? {
+        
+        return NSKeyedUnarchiver.unarchiveObject(withFile: TVShow.ArchiveURL3.path) as? [String:[TVShow]]!
+        
+    }
+    
     private func getGenres() {
         for (key, _) in genreGroups {
             for show in tvShows {
@@ -296,6 +338,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func didUnWindFromUserQueueVC(_ sender: UIStoryboardSegue) {
         guard let UserQueueVC = sender.source as? UserQueueVC else { return }
         userQueue = UserQueueVC.userQueue
+    }
+    @IBAction func didUnWindFromDetailViewVCToHome(_ sender: UIStoryboardSegue) {
+        guard let DetailViewVC = sender.source as? DetailViewVC else { return }
+        userQueue = DetailViewVC.userQueue
     }
     
 }

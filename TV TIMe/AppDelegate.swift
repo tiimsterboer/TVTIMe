@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 
+var launch = ""
+var firstLaunch = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,12 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        /*if let queue = fetchData() {
-            userQueue = queue
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore {
+            launch = "has launched before"
+            firstLaunch = false
         }
         else {
-            userQueue = [TVShow]()
-        }*/
+            launch = "first time"
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            firstLaunch = true
+        }
         return true
     }
 
