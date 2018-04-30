@@ -16,6 +16,7 @@ class SearchResultsVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var detailList: [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
     var name = ""
+    
     @IBOutlet weak var showsTableView: UITableView!
     
     @IBOutlet weak var nameLabel: UILabel!

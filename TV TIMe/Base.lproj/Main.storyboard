@@ -516,12 +516,33 @@
                                     <segue destination="bFe-QN-66M" kind="show" identifier="simSegue" id="FSy-oN-qfb"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="I1d-5A-5F8">
+                                <rect key="frame" x="321" y="263" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXa-qY-pSj">
+                                <rect key="frame" x="15" y="686" width="170" height="30"/>
+                                <color key="backgroundColor" red="0.22110804919999999" green="0.81579345459999997" blue="0.64426064490000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ONz-1P-HEh"/>
+                                    <constraint firstAttribute="width" constant="170" id="WY4-zn-USP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <state key="normal" title="Back to Similar Shows"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="TGv-yJ-zMO" kind="unwind" unwindAction="didUnwindFromDetailViewVCTOSimVC:" id="Wj9-nu-egw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ceb-2l-hbt" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="20" id="1FN-Qm-I8B"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="bottom" secondItem="CQA-BJ-7jH" secondAttribute="bottom" constant="20" id="2al-BF-C7a"/>
                             <constraint firstItem="CQA-BJ-7jH" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="5nw-cZ-7Bg"/>
+                            <constraint firstItem="MXa-qY-pSj" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="15" id="7Lj-8z-f2E"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="vkP-fa-kwh" secondAttribute="trailing" constant="30" id="DTb-A5-S6Q"/>
                             <constraint firstItem="CQA-BJ-7jH" firstAttribute="top" secondItem="pxt-WO-6fP" secondAttribute="bottom" constant="5" id="Fwc-jj-dxR"/>
                             <constraint firstItem="ZZn-de-SPf" firstAttribute="top" secondItem="0ds-tr-xVG" secondAttribute="bottom" constant="58" id="H3e-gA-uuZ"/>
@@ -538,6 +559,7 @@
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="ZZn-de-SPf" secondAttribute="trailing" constant="30" id="kB7-vj-i8f"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="ceb-2l-hbt" secondAttribute="trailing" constant="20" id="mlK-At-VDc"/>
                             <constraint firstItem="kyr-J3-NMo" firstAttribute="leading" secondItem="IQR-K6-Qdu" secondAttribute="leading" constant="16" id="oDz-8j-sbn"/>
+                            <constraint firstItem="IQR-K6-Qdu" firstAttribute="bottom" secondItem="MXa-qY-pSj" secondAttribute="bottom" constant="20" id="qb9-DO-sed"/>
                             <constraint firstItem="IQR-K6-Qdu" firstAttribute="trailing" secondItem="kyr-J3-NMo" secondAttribute="trailing" constant="16" id="vT4-Us-gbr"/>
                             <constraint firstItem="ceb-2l-hbt" firstAttribute="top" secondItem="IQR-K6-Qdu" secondAttribute="top" constant="10" id="xON-rr-Qsk"/>
                             <constraint firstItem="kyr-J3-NMo" firstAttribute="top" secondItem="O6O-96-tHY" secondAttribute="bottom" constant="8" id="xbv-1l-lKu"/>
@@ -548,11 +570,13 @@
                         <outlet property="addToQueueBtn" destination="vkP-fa-kwh" id="c9E-74-kXW"/>
                         <outlet property="alreadyInQueueBtn" destination="0ds-tr-xVG" id="jQT-Ef-wJ2"/>
                         <outlet property="backToSearchButton" destination="CQA-BJ-7jH" id="MEj-hX-Pts"/>
+                        <outlet property="backToSimButton" destination="MXa-qY-pSj" id="TyD-iX-zfe"/>
                         <outlet property="detailLabel" destination="pxt-WO-6fP" id="eOo-ac-Qch"/>
                         <outlet property="genresLbl" destination="kyr-J3-NMo" id="Fb3-TH-LHv"/>
                         <outlet property="homeButton" destination="aut-JU-fE0" id="pgN-po-8uc"/>
                         <outlet property="nameLbl" destination="ceb-2l-hbt" id="pPR-QJ-Q7d"/>
                         <outlet property="showImg" destination="O6O-96-tHY" id="ao0-Dq-sTr"/>
+                        <outlet property="simShowActivityCircle" destination="I1d-5A-5F8" id="47B-bh-qkH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DD3-Dh-fYn" userLabel="First Responder" sceneMemberID="firstResponder"/>

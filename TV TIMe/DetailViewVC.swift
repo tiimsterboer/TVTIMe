@@ -18,6 +18,7 @@ class DetailViewVC: UIViewController {
     var genreGroups: [String: [TVShow]] = [:]
     var tS :[TVShow] = []
     var genTxt = " "
+    var simPage = false
     
     
     @IBOutlet weak var nameLbl: UILabel!
@@ -29,6 +30,8 @@ class DetailViewVC: UIViewController {
     @IBOutlet weak var addToQueueBtn: UIButton!
     @IBOutlet weak var alreadyInQueueBtn: UIButton!
     
+    @IBOutlet weak var backToSimButton: UIButton!
+    @IBOutlet weak var simShowActivityCircle: UIActivityIndicatorView!
     
     @IBAction func addToQueue(_ sender: Any) {
         var alreadyIn = false
@@ -68,6 +71,10 @@ class DetailViewVC: UIViewController {
     @IBOutlet weak var showImg: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        simShowActivityCircle.isHidden = true
+        if simPage == true {
+            backToSimButton.isHidden = false
+        }
         let showSumm = showDetail[0].summary.removeTags(txt: showDetail[0].summary)
         detailLabel.text = showSumm
         nameLbl.text = showDetail[0].name
@@ -108,6 +115,8 @@ class DetailViewVC: UIViewController {
     
     @IBAction func findSimShows(_ sender: Any) {
         //var topMatches = Dictionary<String, Double>()
+        simShowActivityCircle.isHidden = false
+        simShowActivityCircle.startAnimating()
         var sim = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         var rands : [Int] = []
         tS = [showDetail[0], showDetail [0], showDetail[0],showDetail[0], showDetail [0], showDetail[0],showDetail[0], showDetail [0], showDetail[0], showDetail[0]]
@@ -119,136 +128,139 @@ class DetailViewVC: UIViewController {
             
             for x in rands {
                 let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: tvShows[x].summary).freq2)
-                if cos > sim[0] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = sim[5]
-                    tS[6] = tS[5]
-                    sim[5] = sim[4]
-                    tS[5] = tS[4]
-                    sim[4] = sim[3]
-                    tS[4] = tS[3]
-                    sim[3] = sim[2]
-                    tS[3] = tS[2]
-                    sim[2] = sim[1]
-                    tS[2] = tS[1]
-                    sim[1] = sim[0]
-                    tS[1] = tS[0]
-                    sim[0] = cos
-                    tS[0] = tvShows[x]
+                if cos < 0.99999999 {
+                    if cos > sim[0] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = sim[5]
+                        tS[6] = tS[5]
+                        sim[5] = sim[4]
+                        tS[5] = tS[4]
+                        sim[4] = sim[3]
+                        tS[4] = tS[3]
+                        sim[3] = sim[2]
+                        tS[3] = tS[2]
+                        sim[2] = sim[1]
+                        tS[2] = tS[1]
+                        sim[1] = sim[0]
+                        tS[1] = tS[0]
+                        sim[0] = cos
+                        tS[0] = tvShows[x]
+                    }
+                    else if cos > sim[1] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = sim[5]
+                        tS[6] = tS[5]
+                        sim[5] = sim[4]
+                        tS[5] = tS[4]
+                        sim[4] = sim[3]
+                        tS[4] = tS[3]
+                        sim[3] = sim[2]
+                        tS[3] = tS[2]
+                        sim[2] = sim[1]
+                        tS[2] = tS[1]
+                        sim[1] = cos
+                        tS[1] = tvShows[x]
+                    }
+                    else if cos > sim[2] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = sim[5]
+                        tS[6] = tS[5]
+                        sim[5] = sim[4]
+                        tS[5] = tS[4]
+                        sim[4] = sim[3]
+                        tS[4] = tS[3]
+                        sim[3] = sim[2]
+                        tS[3] = tS[2]
+                        sim[2] = cos
+                        tS[2] = tvShows[x]
+                    }
+                    else if cos > sim[3] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = sim[5]
+                        tS[6] = tS[5]
+                        sim[5] = sim[4]
+                        tS[5] = tS[4]
+                        sim[4] = sim[3]
+                        tS[4] = tS[3]
+                        sim[3] = cos
+                        tS[3] = tvShows[x]
+                    }
+                    else if cos > sim[4] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = sim[5]
+                        tS[6] = tS[5]
+                        sim[5] = sim[4]
+                        tS[5] = tS[4]
+                        sim[4] = cos
+                        tS[4] = tvShows[x]
+                    }
+                    else if cos > sim[5] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = sim[5]
+                        tS[6] = tS[5]
+                        sim[5] = cos
+                        tS[5] = tvShows[x]
+                    }
+                    else if cos > sim[6] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = sim[6]
+                        tS[7] = tS[6]
+                        sim[6] = cos
+                        tS[6] = tvShows[x]
+                    }
+                    else if cos > sim[7] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = sim[7]
+                        tS[8] = tS[7]
+                        sim[7] = cos
+                        tS[7] = tvShows[x]
+                    }
+                    else if cos > sim[8] {
+                        sim[9] = sim[8]
+                        tS[9] = tS[8]
+                        sim[8] = cos
+                        tS[8] = tvShows[x]
+                    }
+                    else if cos > sim[9] {
+                        sim[9] = cos
+                        tS[9] = tvShows[x]
+                    }
                 }
-                else if cos > sim[1] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = sim[5]
-                    tS[6] = tS[5]
-                    sim[5] = sim[4]
-                    tS[5] = tS[4]
-                    sim[4] = sim[3]
-                    tS[4] = tS[3]
-                    sim[3] = sim[2]
-                    tS[3] = tS[2]
-                    sim[2] = sim[1]
-                    tS[2] = tS[1]
-                    sim[1] = cos
-                    tS[1] = tvShows[x]
-                }
-                else if cos > sim[2] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = sim[5]
-                    tS[6] = tS[5]
-                    sim[5] = sim[4]
-                    tS[5] = tS[4]
-                    sim[4] = sim[3]
-                    tS[4] = tS[3]
-                    sim[3] = sim[2]
-                    tS[3] = tS[2]
-                    sim[2] = cos
-                    tS[2] = tvShows[x]
-                }
-                else if cos > sim[3] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = sim[5]
-                    tS[6] = tS[5]
-                    sim[5] = sim[4]
-                    tS[5] = tS[4]
-                    sim[4] = sim[3]
-                    tS[4] = tS[3]
-                    sim[3] = cos
-                    tS[3] = tvShows[x]
-                }
-                else if cos > sim[4] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = sim[5]
-                    tS[6] = tS[5]
-                    sim[5] = sim[4]
-                    tS[5] = tS[4]
-                    sim[4] = cos
-                    tS[4] = tvShows[x]
-                }
-                else if cos > sim[5] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = sim[5]
-                    tS[6] = tS[5]
-                    sim[5] = cos
-                    tS[5] = tvShows[x]
-                }
-                else if cos > sim[6] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = sim[6]
-                    tS[7] = tS[6]
-                    sim[6] = cos
-                    tS[6] = tvShows[x]
-                }
-                else if cos > sim[7] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = sim[7]
-                    tS[8] = tS[7]
-                    sim[7] = cos
-                    tS[7] = tvShows[x]
-                }
-                else if cos > sim[8] {
-                    sim[9] = sim[8]
-                    tS[9] = tS[8]
-                    sim[8] = cos
-                    tS[8] = tvShows[x]
-                }
-                else if cos > sim[9] {
-                    sim[9] = cos
-                    tS[9] = tvShows[x]
-                }
+                
             }
         }
         else if showDetail[0].genres.count > 0 {
@@ -263,309 +275,283 @@ class DetailViewVC: UIViewController {
                     print(rands)
                     for x in rands {
                         let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[gen]![x].summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[gen]![x].summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[gen]![x].summary).freq2)
-                        if cos > sim[0] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = sim[2]
-                            tS[3] = tS[2]
-                            sim[2] = sim[1]
-                            tS[2] = tS[1]
-                            sim[1] = sim[0]
-                            tS[1] = tS[0]
-                            sim[0] = cos
-                            tS[0] = genreGroups[gen]![x]
+                        if cos < 0.9999999 {
+                            if cos > sim[0] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = sim[2]
+                                tS[3] = tS[2]
+                                sim[2] = sim[1]
+                                tS[2] = tS[1]
+                                sim[1] = sim[0]
+                                tS[1] = tS[0]
+                                sim[0] = cos
+                                tS[0] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[1] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = sim[2]
+                                tS[3] = tS[2]
+                                sim[2] = sim[1]
+                                tS[2] = tS[1]
+                                sim[1] = cos
+                                tS[1] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[2] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = sim[2]
+                                tS[3] = tS[2]
+                                sim[2] = cos
+                                tS[2] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[3] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = cos
+                                tS[3] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[4] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = cos
+                                tS[4] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[5] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = cos
+                                tS[5] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[6] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = cos
+                                tS[6] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[7] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = cos
+                                tS[7] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[8] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = cos
+                                tS[8] = genreGroups[gen]![x]
+                            }
+                            else if cos > sim[9] {
+                                sim[9] = cos
+                                tS[9] = genreGroups[gen]![x]
+                            }
                         }
-                        else if cos > sim[1] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = sim[2]
-                            tS[3] = tS[2]
-                            sim[2] = sim[1]
-                            tS[2] = tS[1]
-                            sim[1] = cos
-                            tS[1] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[2] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = sim[2]
-                            tS[3] = tS[2]
-                            sim[2] = cos
-                            tS[2] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[3] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = cos
-                            tS[3] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[4] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = cos
-                            tS[4] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[5] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = cos
-                            tS[5] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[6] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = cos
-                            tS[6] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[7] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = cos
-                            tS[7] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[8] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = cos
-                            tS[8] = genreGroups[gen]![x]
-                        }
-                        else if cos > sim[9] {
-                            sim[9] = cos
-                            tS[9] = genreGroups[gen]![x]
-                        }
+                        
                     }
                 }
                 else {
                     for x in genreGroups[gen]! {
                         let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: x.summary).freq2)
-                        if cos > sim[0] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = sim[2]
-                            tS[3] = tS[2]
-                            sim[2] = sim[1]
-                            tS[2] = tS[1]
-                            sim[1] = sim[0]
-                            tS[1] = tS[0]
-                            sim[0] = cos
-                            tS[0] = x
+                        if cos < 0.999999 {
+                            if cos > sim[0] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = sim[2]
+                                tS[3] = tS[2]
+                                sim[2] = sim[1]
+                                tS[2] = tS[1]
+                                sim[1] = sim[0]
+                                tS[1] = tS[0]
+                                sim[0] = cos
+                                tS[0] = x
+                            }
+                            else if cos > sim[1] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = sim[2]
+                                tS[3] = tS[2]
+                                sim[2] = sim[1]
+                                tS[2] = tS[1]
+                                sim[1] = cos
+                                tS[1] = x
+                            }
+                            else if cos > sim[2] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = sim[2]
+                                tS[3] = tS[2]
+                                sim[2] = cos
+                                tS[2] = x
+                            }
+                            else if cos > sim[3] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = sim[3]
+                                tS[4] = tS[3]
+                                sim[3] = cos
+                                tS[3] = x
+                            }
+                            else if cos > sim[4] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = sim[4]
+                                tS[5] = tS[4]
+                                sim[4] = cos
+                                tS[4] = x
+                            }
+                            else if cos > sim[5] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = sim[5]
+                                tS[6] = tS[5]
+                                sim[5] = cos
+                                tS[5] = x
+                            }
+                            else if cos > sim[6] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = sim[6]
+                                tS[7] = tS[6]
+                                sim[6] = cos
+                                tS[6] = x
+                            }
+                            else if cos > sim[7] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = sim[7]
+                                tS[8] = tS[7]
+                                sim[7] = cos
+                                tS[7] = x
+                            }
+                            else if cos > sim[8] {
+                                sim[9] = sim[8]
+                                tS[9] = tS[8]
+                                sim[8] = cos
+                                tS[8] = x
+                            }
+                            else if cos > sim[9] {
+                                sim[9] = cos
+                                tS[9] = x
+                            }
                         }
-                        else if cos > sim[1] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = sim[2]
-                            tS[3] = tS[2]
-                            sim[2] = sim[1]
-                            tS[2] = tS[1]
-                            sim[1] = cos
-                            tS[1] = x
-                        }
-                        else if cos > sim[2] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = sim[2]
-                            tS[3] = tS[2]
-                            sim[2] = cos
-                            tS[2] = x
-                        }
-                        else if cos > sim[3] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = sim[3]
-                            tS[4] = tS[3]
-                            sim[3] = cos
-                            tS[3] = x
-                        }
-                        else if cos > sim[4] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = sim[4]
-                            tS[5] = tS[4]
-                            sim[4] = cos
-                            tS[4] = x
-                        }
-                        else if cos > sim[5] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = sim[5]
-                            tS[6] = tS[5]
-                            sim[5] = cos
-                            tS[5] = x
-                        }
-                        else if cos > sim[6] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = sim[6]
-                            tS[7] = tS[6]
-                            sim[6] = cos
-                            tS[6] = x
-                        }
-                        else if cos > sim[7] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = sim[7]
-                            tS[8] = tS[7]
-                            sim[7] = cos
-                            tS[7] = x
-                        }
-                        else if cos > sim[8] {
-                            sim[9] = sim[8]
-                            tS[9] = tS[8]
-                            sim[8] = cos
-                            tS[8] = x
-                        }
-                        else if cos > sim[9] {
-                            sim[9] = cos
-                            tS[9] = x
-                        }
+                        
                     }
                 }
                 
             }
         }
-        /*if genreGroups[showDetail[0].genres[0]]!.count > 200 {
-            rands =  CosSim.makeList(forLowerBound: 0, andUpperBound: genreGroups[showDetail[0].genres[0]]!.count, andNumNumbers: 200)
-            
-        }
-        print(rands)
-        if showDetail[0].genres.count > 0 {
-            print(true)
-            print(showDetail[0].genres.count)
-        }*/
         
-        //Keep This Portion and update it!
-        
-       /* for x in rands {
-            let cos = CosSim.cosSim(wordBag: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[showDetail[0].genres[0]]![x].summary).wordBag, freq1: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[showDetail[0].genres[0]]![x].summary).freq1, freq2: CosSim.wordCount(r: showDetail[0].summary, s: genreGroups[showDetail[0].genres[0]]![x].summary).freq2)
-            if cos > sim[0] {
-                sim[2] = sim[1]
-                tS[2] = tS[1]
-                sim[1] = sim[0]
-                tS[1] = tS[0]
-                sim[0] = cos
-                tS[0] = genreGroups[showDetail[0].genres[0]]![x]
-            }
-            else if cos > sim[1] {
-                sim[2] = sim[1]
-                tS[2] = tS[1]
-                sim[1] = cos
-                tS[1] = genreGroups[showDetail[0].genres[0]]![x]
-            }
-            else if cos > sim[2] {
-                sim[2] = cos
-                tS[2] = genreGroups[showDetail[0].genres[0]]![x]
-        }
-    }*/
         
         print(sim)
         for show in tS {
@@ -576,6 +562,7 @@ class DetailViewVC: UIViewController {
         print(testQueue)
 }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "simSegue" {
             guard let SimShowsVC = segue.destination as? SimShowsVC else {return}
             SimShowsVC.simShows = self.tS
@@ -583,6 +570,8 @@ class DetailViewVC: UIViewController {
             SimShowsVC.searchList = self.searchList
             SimShowsVC.genreGroups = self.genreGroups
             SimShowsVC.userQueue = self.userQueue
+            simShowActivityCircle.stopAnimating()
+            simShowActivityCircle.isHidden = true
             //SearchResultsVC.tvShows = self.tvShows
             //SearchResultsVC.genreGroups = self.genreGroups
             //print(searchShows.count)

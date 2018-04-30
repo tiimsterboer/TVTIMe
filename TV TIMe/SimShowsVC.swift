@@ -17,6 +17,7 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var userQueue : [TVShow] = []
     var genreGroups: [String: [TVShow]] = [:]
     var name : String = ""
+    var simPage = false
     
     @IBOutlet weak var simShowsTable: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -49,6 +50,7 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        simPage = true
         self.simShowsTable.rowHeight = 100
         simShowsTable.delegate = self
         simShowsTable.dataSource = self
@@ -63,12 +65,13 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             DetailViewVC.searchList = self.searchList
             DetailViewVC.genreGroups = self.genreGroups
             DetailViewVC.userQueue = self.userQueue
+            DetailViewVC.simPage = self.simPage
             //DetailViewVC.tvShows = self.tvShows
             //DetailViewVC.genreGroups = self.genreGroups
             //DetailViewVC.userQueue = self.userQueue
         }
     }
-    @IBAction func didUnwindFromDetailViewVC (_ sender: UIStoryboardSegue) {
+    @IBAction func didUnwindFromDetailViewVCTOSimVC (_ sender: UIStoryboardSegue) {
         guard let DetailViewVC = sender.source as? DetailViewVC else {return}
         userQueue = DetailViewVC.userQueue
         
