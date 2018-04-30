@@ -52,7 +52,7 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         tableView.deleteRows(at: [indexPath], with: .automatic)
         NSKeyedArchiver.archiveRootObject(userQueue, toFile: TVShow.ArchiveURL2.path)
     }
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    /*func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -60,7 +60,7 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         userQueue.remove(at: sourceIndexPath.row)
         userQueue.insert(item, at: destinationIndexPath.row)
         userQueueTV.reloadData()
-    }
+    }*/
     
     
     override func viewDidLoad() {
@@ -69,7 +69,7 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         userQueueTV.delegate = self
         userQueueTV.dataSource = self
         userQueueTV.rowHeight = 100
-        userQueueTV.setEditing(true, animated: true)
+        //userQueueTV.setEditing(true, animated: true)
         userQueueTV.backgroundColor = UIColor.darkGray
         userQueueTV.backgroundView  = nil
     }
@@ -86,4 +86,5 @@ class UserQueueVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-}
+ }
+

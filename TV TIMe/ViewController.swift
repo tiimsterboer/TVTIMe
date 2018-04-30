@@ -250,9 +250,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     
                 }
                 print(tvShows.count)
-                //print(tvShows[45].name)
-               //print(tvShows[226].genres)
-                //print(tvShows[137].summary)
+                
             }
         
             let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(tvShows, toFile: TVShow.ArchiveURL.path)

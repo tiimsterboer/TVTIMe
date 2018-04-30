@@ -68,6 +68,11 @@ class SimShowsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             //DetailViewVC.userQueue = self.userQueue
         }
     }
-    
+    @IBAction func didUnwindFromDetailViewVC (_ sender: UIStoryboardSegue) {
+        guard let DetailViewVC = sender.source as? DetailViewVC else {return}
+        userQueue = DetailViewVC.userQueue
+        
+        
+    }
     
 }
