@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         genrePicker.delegate = self
         genrePicker.dataSource = self
         
-        
+        //UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
         
         //activityIndicator.center = self.view.center
         //activityIndicator.hidesWhenStopped = true
@@ -313,7 +313,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             //getGenres()
             guard let SearchResultsVC = segue.destination as? SearchResultsVC else {return}
             SearchResultsVC.showsList = self.searchShows
-            SearchResultsVC.name = self.searchField.text!
+            if searchField.text != "" && gen != ""{
+                SearchResultsVC.name = "\(searchField.text!) and \(gen)"
+            }
+            else if searchField.text == "" {
+                SearchResultsVC.name = self.gen
+            }
+            else {
+                SearchResultsVC.name = self.searchField.text!
+            }
+            
             SearchResultsVC.tvShows = self.tvShows
             SearchResultsVC.genreGroups = self.genreGroups
             SearchResultsVC.userQueue = self.userQueue
